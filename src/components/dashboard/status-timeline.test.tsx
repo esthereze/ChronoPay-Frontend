@@ -12,6 +12,7 @@ const mockItems: TimelineItem[] = [
     actor: "Actor 1",
     details: "Details 1",
   },
+  // Exercises the `!!item.actor` branch of `hasDetails` (no details, only actor).
   {
     id: "2",
     title: "Step 2",
@@ -19,6 +20,14 @@ const mockItems: TimelineItem[] = [
     timestamp: "2026-06-30 10:00 AM",
     actor: "Actor 2",
     isCurrent: true,
+  },
+  // Exercises the neither-details-nor-actor branch (renders without the
+  // expand toggle at all).
+  {
+    id: "3",
+    title: "Step 3",
+    status: "pending",
+    timestamp: "2026-06-30 11:00 AM",
   },
 ];
 
@@ -31,8 +40,11 @@ describe("StatusTimeline", () => {
 
   it("expands details when clicked", () => {
     render(<StatusTimeline items={mockItems} />);
-    const button = screen.getByText("Show Details");
-    fireEvent.click(button);
+    // Two of the three mockItems expand their details (item 1 has both
+    // `details` and `actor`, item 2 has only `actor`); use getAllByText and
+    // click the first match so the test stays focused on row 1's payload.
+    const showButtons = screen.getAllByText("Show Details");
+    fireEvent.click(showButtons[0]);
     expect(screen.getByText("Hide Details")).toBeInTheDocument();
     expect(screen.getByText("Actor: Actor 1")).toBeInTheDocument();
     expect(screen.getByText("Details 1")).toBeInTheDocument();

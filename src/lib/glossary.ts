@@ -122,4 +122,27 @@ export const glossary = {
     learnMoreHref: "https://stellar.org",
     learnMoreLabel: "Learn about Stellar →",
   },
+
+  /**
+   * Base price — the per-session floor price suppliers set for a service.
+   * Can be combined with multipliers or discounts, but the base is the
+   * canonical rate a buyer sees first.
+   */
+  basePrice: {
+    title: "Base price",
+    body: "The base price is the starting per-session rate in XLM a buyer will see when browsing your service. You can apply discounts or multipliers later without changing the base.",
+    learnMoreHref: "/docs/onboarding#base-price",
+    learnMoreLabel: "Learn more about base pricing →",
+  },
+
+  /**
+   * Session duration — how long one booking lasts, in minutes.
+   * ChronoPay mirrors marketplace norms with 15-minute increments.
+   */
+  sessionDuration: {
+    title: "Session duration",
+    body: "The length of a single booked session in minutes. ChronoPay stores durations in 15-minute increments so buyers can stitch sessions cleanly into their calendar.",
+    learnMoreHref: "/docs/onboarding#session-duration",
+    learnMoreLabel: "Learn more about durations →",
+  },
 } satisfies Record<string, GlossaryTerm>;

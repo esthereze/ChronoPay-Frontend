@@ -65,3 +65,26 @@ export type Supplier = {
   title: string;
   badges: SocialProofBadgeEntry[];
 };
+
+/**
+ * ServiceItem — a single row in the supplier "Services & Pricing" repeater.
+ *
+ * Each service represents a bookable offering with its own base price, duration,
+ * and description. The `id` is stable across renders so reorders, updates, and
+ * deletions correctly target a single row.
+ */
+export type ServiceItem = {
+  id: string;
+  title: string;
+  description: string;
+  /** Base rate in XLM (Lumens). Decimals are allowed up to 2 places. */
+  basePriceXLM: number;
+  /** Duration of one session in minutes. Must be a positive multiple of 15. */
+  durationMinutes: number;
+};
+
+/**
+ * Draft status surfaced in the supplier onboarding step header.
+ * Mirrors the three states listed in `docs/save-resume-drafts-ux.md`.
+ */
+export type DraftStatus = "saved" | "saving" | "offline";
